@@ -2,39 +2,123 @@
 <html lang="hu">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Jelentkezés - Zeg Cheerleading</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jelentkezés</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #8e44ad; /* lila */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: white;
+    }
+
+    .form-container {
+      background: #9b59b6; /* világosabb lila */
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 450px;
+      position: relative;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-container input, 
+    .form-container textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .form-container textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-container button {
+      width: 100%;
+      padding: 12px;
+      background: #6c3483; /* sötétebb lila */
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .form-container button:hover {
+      background: #512e5f;
+    }
+
+    .thankyou_message {
+      display: none;
+      text-align: center;
+      font-size: 16px;
+      color: #00ff00;
+      margin-top: 15px;
+      background: rgba(0,0,0,0.2);
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    /* Vissza nyíl */
+    .back-link {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      color: white;
+      font-size: 20px;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      color: #ddd;
+    }
+  </style>
 </head>
 <body>
-  <header class="navbar">
-    <div class="logo">
-      <img src="Anyagok/Logo.JPEG" alt="Zalaegerszegi Cheerleading logó">
-      <span>Zalaegerszegi Cheerleading Sportegyesület</span>
-    </div>
-  </header>
+  <div class="form-container">
+    <a href="index.html" class="back-link">&#8592; Kezdőlap</a>
+    <h2>Jelentkezés</h2>
+    <form id="jelentkezesForm" action="https://formsubmit.co/benedekszabo87@gmail.com" method="POST">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="Új jelentkezés érkezett!">
 
-  <section class="contact">
-    <h2 class="section-title">Jelentkezési lap</h2>
-    <form class="apply-form">
-      <label>Név:</label>
-      <input type="text" placeholder="Add meg a neved">
+      <input type="text" name="nev" placeholder="Teljes név" required>
+      <input type="email" name="email" placeholder="E-mail cím" required>
+      <textarea name="magamrol" placeholder="Röviden magamról" required></textarea>
 
-      <label>Email:</label>
-      <input type="email" placeholder="Add meg az email címed">
-
-      <label>Telefonszám:</label>
-      <input type="tel" placeholder="Add meg a telefonszámod">
-
-      <label>Üzenet:</label>
-      <textarea placeholder="Írj pár szót magadról..."></textarea>
-
-      <button type="submit">Elküldés</button>
+      <button type="submit">Jelentkezem</button>
     </form>
-  </section>
 
-  <footer>
-    © 2025 Zalaegerszegi Cheerleading Sportegyesület
-  </footer>
+    <div class="thankyou_message" id="thankyou">
+      ✅ Sikeres jelentkezés!
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('jelentkezesForm');
+    const thankyou = document.getElementById('thankyou');
+
+    form.addEventListener('submit', function(e) {
+      // Kis késleltetés a FormSubmit feldolgozásra
+      setTimeout(() => {
+        thankyou.style.display = 'block';
+      }, 500);
+    });
+  </script>
 </body>
 </html>

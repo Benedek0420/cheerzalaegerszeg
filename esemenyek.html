@@ -33,8 +33,8 @@
   <section>
     <h2 class="section-title">Események</h2>
     <ul class="event-list">
-      <li>2025. október 12. – Fellépés a Sportcsarnokban</li>
-      <li>2025. november 5. – Verseny Budapesten</li>
+      <!-- <li>2025. október 12. – Fellépés a Sportcsarnokban</li>
+      <li>2025. november 5. – Verseny Budapesten</li> -->
     </ul>
   </section>
 
@@ -42,6 +42,14 @@
     © 2025 Zalaegerszegi Cheerleading Sportegyesület
   </footer>
 
+<script>
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
 
 </body>
 </html>

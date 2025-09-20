@@ -7,16 +7,60 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header 
-  <section>
-    <h2 class="section-title">Elérhetőség</h2>
-    <p>Email: <a href="mailto:info@zalaegerszegicheer.hu">info@zalaegerszegicheer.hu</a></p>
-    <p>Facebook: <a href="https://www.facebook.com/share/1ErmbcEswD/">Zalaegerszegi Cheerleading Sportegyesület</a></p>
-  </section>
+  <header  class="navbar">
+  <div class="logo">
+    <img src="Anyagok/Logo.JPEG" alt="Zeg Cheerleading logó">
+    <span>Zalaegerszegi Cheerleading Sportegyesület</span>
+  </div>
+  
+  <nav class="nav-links">
+    <a href="index.html">Kezdőlap</a>
+    <a href="galeria.html">Galéria</a>
+    <a href="esemenyek.html">Események</a>
+    <a href="elerhetoseg.html">Elérhetőség</a>
+    <a href="jelentkezes.html" class="btn-nav">Csatlakozás</a>
+  </nav>
+
+  <div class="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</header>
+
+  </header>
+
+  <section id="elerhetosegek">
+  <h2 class="section-title">Elérhetőségek:</h2>
+  <ul class="event-list">
+    <li>Email: <a href="mailto:cheerzalaegerszeg@gmail.com">cheerzalaegerszeg@gmail.com</a></li>
+    <hr>
+    <li>Facebook: <a href="https://www.facebook.com/share/1ErmbcEswD/" target="_blank">Zalaegerszegi Cheerleading Sportegyesület</a></li>
+    <hr>
+    <li>Instagram: <a href="https://www.instagram.com/zalaegerszegicheerse/" target="_blank">@zalaegerszegicheerse</a></li>
+    <hr>
+    <li>Edzések helyszíne: <br>Zalaegerszegi Liszt Ferenc Általános Iskola</li>
+    <hr>
+    <li>Edzés időpontok: Kedd és Csütörtök 15:30-17:00 </li>
+    <hr>
+    <li>Csapatvezető: Tasnádi Renáta</li>
+    <hr>
+  </ul>
+</section>
+
 
   <footer>
     © 2025 Zalaegerszegi Cheerleading Sportegyesület
   </footer>
+
+<script>
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
 
 </body>
 </html>

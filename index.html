@@ -13,7 +13,7 @@
       <img src="Anyagok/Logo.JPEG" alt="Zeg Cheerleading logó">
       <span>Zalaegerszegi Cheerleading Sportegyesület</span>
     </div>
-    <nav>
+    <nav class="nav-links">
       <a href="index.html">Kezdőlap</a>
       <a href="galeria.html">Galéria</a>
       <a href="esemenyek.html">Események</a>
@@ -43,8 +43,14 @@
     © 2025 Zalaegerszegi Cheerleading Sportegyesület
   </footer>
 
-<script src="script.js"></script>
+  <script>
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
 
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
 
 </body>
 </html>

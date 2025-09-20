@@ -289,3 +289,17 @@ form-container {
   }
 }
 
+/* Alapból (gépen) ne látszódjon */
+.mobile-only {
+  display: none;
+}
+
+/* Telefonon (max 768px) jelenjen meg */
+@media (max-width: 768px) {
+  .mobile-only {
+    display: block;
+    border: 2;
+    border-bottom: 1px solid #ffffff;
+    margin: px 0;
+  }
+}

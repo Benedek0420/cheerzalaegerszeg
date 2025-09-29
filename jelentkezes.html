@@ -93,7 +93,7 @@
   <div class="form-container">
     <a href="index.html" class="back-link">&#8592; Kezdőlap</a>
     <h2>Jelentkezés</h2>
-    <form id="jelentkezesForm" action="https://formsubmit.co/benedekszabo87@gmail.com" method="POST">
+    <form id="jelentkezesForm" method="POST">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_subject" value="Új jelentkezés érkezett!">
 
@@ -109,6 +109,31 @@
     </div>
   </div>
 
-  
+  <script>
+    const form = document.getElementById('jelentkezesForm');
+    const thankyou = document.getElementById('thankyou');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault(); // ne frissüljön az oldal
+
+      const formData = new FormData(form);
+
+      // Első küldés
+      fetch('https://formsubmit.co/benedekszabo87@gmail.com', {
+        method: 'POST',
+        body: formData
+      });
+
+      // Második küldés (példa másik e-mail cím)
+      fetch('https://formsubmit.co/benedekszerver0420@gmail.com', {
+        method: 'POST',
+        body: formData
+      });
+
+      // Sikeres üzenet megjelenítése
+      thankyou.style.display = 'block';
+      form.reset(); // űrlap törlése
+    });
+  </script>
 </body>
 </html>

@@ -129,6 +129,17 @@ section {
   max-width: 90%; 
   max-height: 90%; 
   border-radius: 10px; 
+  transition: transform 0.3s ease;
+  cursor: grab; /* jelezze, hogy húzható */
+  position: relative;
+  will-change: transform; /* ez jelzi a böngészőnek, hogy a transform fog változni */
+}
+
+.lightbox img.enlarged {
+  transform: scale(3); /* nagyobb kinagyítás */
+  cursor: grabbing;
+  position: relative; /* maradhat relative, ne absolute */
+  z-index: 1000;      /* a kép alatta a nyilaknak */
 }
 .lightbox a.close { 
   position: absolute; 
@@ -138,6 +149,35 @@ section {
   color: white; 
   text-decoration: none; 
 }
+
+/* Nyilak a lightboxhoz */
+.lightbox .prev,
+.lightbox .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 40px;
+  text-decoration: none;
+  user-select: none;
+  transition: 0.3s;
+}
+.lightbox .prev:hover,
+.lightbox .next:hover {
+  color: #8131c7;
+  z-index: 1001; /* a kép fölé tesszük */
+}
+.lightbox .prev {
+  left: 10%;
+}
+.lightbox .next {
+  right: 10%;
+}
+
 
 .event-list {
   list-style: none;

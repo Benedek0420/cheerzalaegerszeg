@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mappa Galéria</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body {
+    background: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  header.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background: rgba(0,0,0,0.9);
+    border-bottom: 2px solid #d85aff;
+  }
+
+  header .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    color: #d85aff;
+  }
+
+  header .logo img { height: 45px; }
+
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+  }
+
+  nav a:hover { color: #d85aff; }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    padding: 40px 20px;
+    flex: 1;
+  }
+
+  .gallery img {
+    width: 100%;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .lightbox { 
+    display: none; 
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.9); 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 1000; 
+  }
+
+  .lightbox:target { display: flex; }
+
+  .lightbox img {
+    max-width: 90%; 
+    max-height: 90%; 
+    border-radius: 12px;
+    cursor: grab;
+    position: relative;
+    will-change: transform;
+  }
+
+  .lightbox img.enlarged {
+    transform: scale(2.5);
+    cursor: grabbing;
+  }
+
+  .lightbox a.close { 
+    position: absolute; top: 20px; right: 30px; 
+    font-size: 40px; color: white; text-decoration: none; 
+  }
+
+  .lightbox .prev,
+  .lightbox .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 40px;
+    text-decoration: none;
+    user-select: none;
+  }
+
+  .lightbox .prev:hover,
+  .lightbox .next:hover { color: #d85aff; }
+
+  .lightbox .prev { left: 10%; }
+  .lightbox .next { right: 10%; }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 2px solid #d85aff;
+    background: #000;
+    margin-top: auto;
+  }
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <img src="Logo.JPEG" alt="Logó">
+    <span>Galéria / IV. Balaton Dance Cup</span>
+  </div>
+  <nav class="nav-links">
+    <a href="index.html">Kezdőlap</a>
+    <a href="galeria.html">Galéria</a>
+  </nav>
+</header>
+
+<section class="gallery">
+  <a href="#lb1"><img src="Csoportkép 3.jpg" alt=""></a>
+  <a href="#lb2"><img src="kep2.jpg" alt=""></a>
+  <a href="#lb3"><img src="kep3.jpg" alt=""></a>
+  <a href="#lb4"><img src="kep4.jpg" alt=""></a>
+</section>
+
+<!-- LIGHTBOXOK -->
+<div id="lb1" class="lightbox">
+  <a href="#" class="close">&times;</a>
+  <a href="#lb4" class="prev">&#10094;</a>
+  <img src="kep1.jpg" alt="">
+  <a href="#lb2" class="next">&#10095;</a>
+</div>
+
+<div id="lb2" class="lightbox">
+  <a href="#" class="close">&times;</a>
+  <a href="#lb1" class="prev">&#10094;</a>
+  <img src="kep2.jpg" alt="">
+  <a href="#lb3" class="next">&#10095;</a>
+</div>
+
+<div id="lb3" class="lightbox">
+  <a href="#" class="close">&times;</a>
+  <a href="#lb2" class="prev">&#10094;</a>
+  <img src="kep3.jpg" alt="">
+  <a href="#lb4" class="next">&#10095;</a>
+</div>
+
+<div id="lb4" class="lightbox">
+  <a href="#" class="close">&times;</a>
+  <a href="#lb3" class="prev">&#10094;</a>
+  <img src="kep4.jpg" alt="">
+  <a href="#lb1" class="next">&#10095;</a>
+</div>
+
+<footer>
+  © 2025 Zalaegerszegi Cheerleading Sportegyesület
+</footer>
+
+<script>
+  // Lightbox nagyítás és húzás
+  const lightboxImages = document.querySelectorAll('.lightbox img');
+
+  lightboxImages.forEach(img => {
+    let isDragging = false;
+    let startX, startY;
+    let currentX = 0, currentY = 0;
+
+    img.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!img.classList.contains('enlarged')) {
+        img.classList.add('enlarged');
+        currentX = 0; currentY = 0;
+        img.style.transform = `translate(0px, 0px) scale(2.5)`;
+      } else {
+        img.classList.remove('enlarged');
+        img.style.transform = 'translate(0px, 0px) scale(1)';
+      }
+    });
+
+    img.addEventListener('mousedown', e => {
+      if (!img.classList.contains('enlarged')) return;
+      isDragging = true;
+      startX = e.clientX - currentX;
+      startY = e.clientY - currentY;
+      img.style.cursor = 'grabbing';
+    });
+
+    img.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      currentX = e.clientX - startX;
+      currentY = e.clientY - startY;
+      img.style.transform = `translate(${currentX}px, ${currentY}px) scale(2.5)`;
+    });
+
+    img.addEventListener('mouseup', () => {
+      isDragging = false;
+      img.style.cursor = 'grab';
+    });
+
+    img.addEventListener('mouseleave', () => {
+      isDragging = false;
+      img.style.cursor = 'grab';
+    });
+  });
+</script>
+
+</body>
+</html>
